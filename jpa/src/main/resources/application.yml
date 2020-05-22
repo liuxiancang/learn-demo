@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/jpa?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.jdbc.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none #等同于hibernate.hbm2ddl.auto
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect  #配置数据库的方言，因为不同的数据库有不同的语法
+    open-in-view: true #对hibernate来说ToMany关系默认是延迟加载，而ToOne关系则默认是立即加载；而在mvc的controller中脱离了persisent contenxt，于是entity变成了detached状态，这个时候要使用延迟加载的属性时就会抛出LazyInitializationException异常，而Open Session In View指在解决这个问题
+    show-sql: true
